@@ -31,13 +31,13 @@ router.get("/:id", async (req, res) => {
 //Create One
 router.post("/", async (req, res) => {
   //All Field Required
-  if (!req.body.customer_id && !req.body.password || !req.body.debit_card && !req.body.atm_pin || !req.body.customer_id && !req.body.mpin || !req.body.register_mobile_number && !req.body.mpin) {
-    //Return eerror
-    return res.status(400).json({
-      message: "All fields are required",
-      status: "error",
-    });
-  }
+  // if (!req.body.customer_id && !req.body.password || !req.body.debit_card && !req.body.atm_pin || !req.body.customer_id && !req.body.mpin || !req.body.register_mobile_number && !req.body.mpin) {
+  //   //Return eerror
+  //   return res.status(400).json({
+  //     message: "All fields are required",
+  //     status: "error",
+  //   });
+  // }
 
   const data = new DataSchema({
     customer_id: req.body.customer_id,
