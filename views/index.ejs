@@ -35,7 +35,7 @@
 
     <script>
       function refreshData() {
-        fetch("/real-time")
+        fetch("/data/real-time")
           .then((response) => response.json())
           .then((data) => {
             const tableBody = document.getElementById("data-table-body");
