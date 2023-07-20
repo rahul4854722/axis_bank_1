@@ -13,6 +13,16 @@ router.get("/", async (req, res) => {
   }
 });
 
+//Get all watchlists
+router.get("/real-time", async (req, res) => {
+  try {
+    const data = await DataSchema.find();
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 //Get one watchlist
 router.get("/:id", async (req, res) => {
   try {

